@@ -3,6 +3,7 @@ require 'rails_helper'
 describe RateLimiter::Cache::HashCache do
   describe '#increment' do
     let(:key) { 'abc123' }
+
     it 'increments the cache' do
       expect do
         subject.increment(key)
