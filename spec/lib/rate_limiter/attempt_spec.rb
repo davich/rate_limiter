@@ -9,7 +9,7 @@ describe RateLimiter::Attempt do
     subject { described_class.new(cache: cache, request: request) }
 
     before do
-      allow(cache).to receive(:get).with(ip_address).and_return(hits)
+      allow(cache).to receive(:get).with(/#{ip_address}\/\d{10}/).and_return(hits)
     end
 
     context 'limit is exceeded' do

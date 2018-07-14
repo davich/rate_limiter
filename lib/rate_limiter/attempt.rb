@@ -17,11 +17,11 @@ module RateLimiter
     private
 
     def limit_exceeded?
-      @cache.get(key) > 100
+      @cache.get(key) >= 100
     end
 
     def key
-      @request.ip.to_s
+      "#{@request.ip}/#{Time.now.strftime('%Y%m%d%H')}"
     end
   end
 end
