@@ -1,5 +1,7 @@
 module RateLimiter
   class Attempt
+    MAX_REQUESTS_PER_HOUR = 100
+    
     def initialize(cache:, request:)
       @cache = cache
       @request = request
@@ -20,7 +22,7 @@ module RateLimiter
     private
 
     def limit_exceeded?
-      @cache.get(key) >= 100
+      @cache.get(key) >= MAX_REQUESTS_PER_HOUR
     end
 
     def key
