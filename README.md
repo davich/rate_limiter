@@ -6,7 +6,7 @@ This app contains a simple Rate Limiter
 
 * The system allows a specific IP address to hit the site 100 times per hour before being rate limited. This is calculated on the clock hour. If, for example, a user hits the site 100 times at 11:59, the user will be able to hit the site again at 12:00. A rolling rate limiter would be much less performant (storing every hit by every user). This solution allows a user to hit the site a maximum of 200 times within a 60 minute period. This is acceptable for most use cases.
 
-* This does create one potential problem. If a site is being ddosed and all bots get limited, this solution means that they would all get unblocked at the turn of the hour; creating a sudden, very high load.
+* This does create one potential problem. If a site is being ddosed and all bots get limited, this solution means that they would all get unblocked at the turn of the hour; creating a sudden, very high load. Consequently, this is not recommended for actual DDOS protection.
 
 * To run:
 > bundle install

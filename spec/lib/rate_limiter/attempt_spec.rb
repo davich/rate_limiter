@@ -26,7 +26,7 @@ describe RateLimiter::Attempt do
       end
 
       it 'returns limited message' do
-        expect(subject.attempt!).to include(limited_message: 'Rate Limit Exceeded. Try again in 459 seconds')
+        expect(subject.attempt!).to include(try_again_seconds: 459)
       end
 
       it 'does not block other users from accessing it' do

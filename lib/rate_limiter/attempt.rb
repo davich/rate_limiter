@@ -9,7 +9,7 @@ module RateLimiter
       if limit_exceeded?
         {
           allowed: false,
-          limited_message: "Rate Limit Exceeded. Try again in #{seconds_until_next_hour} seconds"
+          try_again_seconds: seconds_until_next_hour,
         }
       else
         @cache.increment(key)
@@ -24,12 +24,13 @@ module RateLimiter
     end
 
     def key
-      "#{@request.ip}/#{Time.now.strftime('%Y%m%d%H')}"
+      "#{@request.ip}/#{DateTime.now.strftime('%Y%m%d%H')}"
     end
 
     def seconds_until_next_hour
-      x = Time.parse(Time.now.strftime('%Y-%m-%d %H:00')) + 1.hour
-      (x - Time.now).floor
+      next_hour = DateTime.now.beginning_of_hour + 1.hour
+      diff_in_seconds = (next_hour - DateTime.now) * 1.days
+      diff_in_seconds.to_i
     end
   end
 end

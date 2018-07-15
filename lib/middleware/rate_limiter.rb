@@ -9,7 +9,11 @@ module Middleware
     end
 
     def call(env)
-      attempt = ::RateLimiter::Attempt.new(cache: @cache, request: Rack::Request.new(env)).attempt!
+      attempt =
+        ::RateLimiter::Attempt.new(
+          cache: @cache,
+          request: Rack::Request.new(env)
+        ).attempt!
 
       if attempt[:allowed]
         @app.call(env)
@@ -17,7 +21,7 @@ module Middleware
         [
           429,
           {'Content-Type' => 'text/plain; charset=utf-8'},
-          [attempt[:limited_message]],
+          ["Rate Limit Exceeded. Try again in #{attempt[:try_again_seconds]} seconds"],
         ]
       end
     end
