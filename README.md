@@ -9,9 +9,13 @@ This app contains a simple Rate Limiter
 * This does create one potential problem. If a site is being ddosed and all bots get limited, this solution means that they would all get unblocked at the turn of the hour; creating a sudden, very high load. Consequently, this is not recommended for actual DDOS protection.
 
 * To run:
+```bash
 > bundle install
 > bundle exec rake db:migrate
 > bundle exec rails s
+```
 
 * To run the tests
+```bash
 > bundle exec rspec
+```
