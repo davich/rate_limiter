@@ -1,4 +1,4 @@
-# README
+# Rate Limiter App
 
 This app contains a simple Rate Limiter
 
